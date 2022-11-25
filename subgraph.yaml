@@ -1,0 +1,62 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: InstigatorsNFT
+    network: mainnet
+    source:
+      address: "0xf7FCe9411A01F7B2DEE146d3961aA4A602EA2C80"
+      abi: InstigatorsNFT
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - ApprovalForAll
+        - DefaultRoyalty
+        - OwnerUpdated
+        - PlatformFeeInfoUpdated
+        - PrimarySaleRecipientUpdated
+        - RoleAdminChanged
+        - RoleGranted
+        - RoleRevoked
+        - RoyaltyForToken
+        - TokensMinted
+        - TokensMintedWithSignature
+        - TransferBatch
+        - TransferSingle
+        - URI
+      abis:
+        - name: InstigatorsNFT
+          file: ./abis/InstigatorsNFT.json
+      eventHandlers:
+        - event: ApprovalForAll(indexed address,indexed address,bool)
+          handler: handleApprovalForAll
+        - event: DefaultRoyalty(address,uint256)
+          handler: handleDefaultRoyalty
+        - event: OwnerUpdated(address,address)
+          handler: handleOwnerUpdated
+        - event: PlatformFeeInfoUpdated(address,uint256)
+          handler: handlePlatformFeeInfoUpdated
+        - event: PrimarySaleRecipientUpdated(indexed address)
+          handler: handlePrimarySaleRecipientUpdated
+        - event: RoleAdminChanged(indexed bytes32,indexed bytes32,indexed bytes32)
+          handler: handleRoleAdminChanged
+        - event: RoleGranted(indexed bytes32,indexed address,indexed address)
+          handler: handleRoleGranted
+        - event: RoleRevoked(indexed bytes32,indexed address,indexed address)
+          handler: handleRoleRevoked
+        - event: RoyaltyForToken(indexed uint256,address,uint256)
+          handler: handleRoyaltyForToken
+        - event: TokensMinted(indexed address,indexed uint256,string,uint256)
+          handler: handleTokensMinted
+        - event: TokensMintedWithSignature(indexed address,indexed address,indexed uint256,(address,address,uint256,address,uint256,string,uint256,uint256,address,uint128,uint128,bytes32))
+          handler: handleTokensMintedWithSignature
+        - event: TransferBatch(indexed address,indexed address,indexed address,uint256[],uint256[])
+          handler: handleTransferBatch
+        - event: TransferSingle(indexed address,indexed address,indexed address,uint256,uint256)
+          handler: handleTransferSingle
+        - event: URI(string,indexed uint256)
+          handler: handleURI
+      file: ./src/instigators-nft.ts
