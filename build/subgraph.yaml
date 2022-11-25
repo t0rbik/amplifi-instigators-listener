@@ -2,7 +2,7 @@ specVersion: 0.0.5
 description: This subgraph works as a mint event listener for AmpliFi Instigators NFT
 repository: https://github.com/t0rbik/amplifi-instigators-listener
 schema:
-  file: ./schema.graphql
+  file: schema.graphql
 dataSources:
   - kind: ethereum
     name: InstigatorsNFT
@@ -32,7 +32,7 @@ dataSources:
         - TokenMinted
       abis:
         - name: InstigatorsNFT
-          file: ./abis/InstigatorsNFT.json
+          file: InstigatorsNFT\abis\InstigatorsNFT.json
       eventHandlers:
         - event: ApprovalForAll(indexed address,indexed address,bool)
           handler: handleApprovalForAll
@@ -54,7 +54,8 @@ dataSources:
           handler: handleRoyaltyForToken
         - event: TokensMinted(indexed address,indexed uint256,string,uint256)
           handler: handleTokensMinted
-        - event: TokensMintedWithSignature(indexed address,indexed address,indexed uint256,(address,address,uint256,address,uint256,string,uint256,uint256,address,uint128,uint128,bytes32))
+        - event: TokensMintedWithSignature(indexed address,indexed address,indexed
+            uint256,(address,address,uint256,address,uint256,string,uint256,uint256,address,uint128,uint128,bytes32))
           handler: handleTokensMintedWithSignature
         - event: TransferBatch(indexed address,indexed address,indexed address,uint256[],uint256[])
           handler: handleTransferBatch
@@ -62,4 +63,4 @@ dataSources:
           handler: handleTransferSingle
         - event: URI(string,indexed uint256)
           handler: handleURI
-      file: ./src/instigators-nft.ts
+      file: InstigatorsNFT\InstigatorsNFT.wasm
