@@ -277,7 +277,7 @@ export function handleURI(event: URIEvent): void {
 
 function createAddressMinted(event: TokensMintedWithSignatureEvent): void {
   let entity = new AddressMinted(
-    event.params.mintedTo.concatI32(event.logIndex.toI32())
+    event.params.mintedTo.concat(event.params.signer)
   );
 
   entity.entries;
@@ -296,7 +296,7 @@ function checkAddressMinted(
   event: TokensMintedWithSignatureEvent
 ): AddressMinted | null {
   let entity = AddressMinted.load(
-    event.params.mintedTo.concatI32(event.logIndex.toI32())
+    event.params.mintedTo.concat(event.params.signer)
   );
 
   return !!entity ? entity : null;
